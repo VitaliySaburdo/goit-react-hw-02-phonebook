@@ -1,17 +1,22 @@
 import { Component } from 'react';
-import {Form} from './Form/Form'
+import { Form } from './Form/Form'
+import { nanoid } from "nanoid";
 
 export class App extends Component {
   state = {
     contacts: [],
-
   };
 
-  formSubmitHendler = data => {
-  console.log(data)
+  formSubmitHendler = ({name, number}) => {
+    const contact = {
+        id: nanoid(),
+        name,
+        number,
+      }
+      this.setState(({contacts}) => ({
+      contacts: [contact, ...contacts],
+    })); 
 }
-
-
 
   render() {
     return (
