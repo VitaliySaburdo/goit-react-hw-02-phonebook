@@ -9,7 +9,7 @@ export class App extends Component {
 
   formSubmitHendler = ({name, number}) => {
     const contact = {
-        id: nanoid(),
+        id: nanoid(3),
         name,
         number,
       }
