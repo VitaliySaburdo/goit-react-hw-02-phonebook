@@ -1,10 +1,12 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { Form } from './Form/Form';
+import { ContactForm } from './ContactForm/ContactForm';
 import { Section } from './Section/Section';
 import { RenderContacts } from './RenderContactsList/RenderContactsList';
 import Filter from './Filter/Filter';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import {Container} from './App.styled'
+
 
 export class App extends Component {
   state = {
@@ -16,10 +18,10 @@ export class App extends Component {
     ],
     filter: '',
   };
-  //   static propTypes = {
-  //     contacts: PropTypes.array.isRequired,
-  //     filter: PropTypes.string.isRequired,
-  // };
+    static propTypes = {
+      contacts: PropTypes.array,
+      filter: PropTypes.string,
+  };
     deleteContacts = id => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== id),
@@ -38,7 +40,7 @@ export class App extends Component {
     );
 
      if (isNameInContact) {
-      alert(`${name} is already in contacts`);
+     return alert(`${name} is already in contacts`);
     }
       this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
@@ -58,13 +60,13 @@ export class App extends Component {
       contact.name.toLowerCase().includes(normalizeFilter)
     );
     return (
-      <div>
-        <Section title="Phone Boock"/>
-          <Form onSubmit={this.formSubmitHendler} />
+      <Container>
+        <Section title="Phonebook"/>
+          <ContactForm onSubmit={this.formSubmitHendler} />
         <Section title="Contacts"/>
           <Filter value={filter} onChange={this.changeFilter} />
           <RenderContacts contacts={visibleContact}  onDelete={this.deleteContacts}/>
-      </div>
+      </Container>
     );
   }
 }

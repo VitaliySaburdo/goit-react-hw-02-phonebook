@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
+import { Item, Button } from './RenderContactList.styled';
 
 export const RenderContacts = ({ contacts, onDelete }) => {
   return (
     <ul>
       {contacts.map(contact => (
-        <li key={contact.id}>
+        <Item key={contact.id}>
           {contact.name}: {contact.number}
-          <button onClick={() => onDelete(contact.id)}>delete</button>
-        </li>
+          <Button onClick={() => onDelete(contact.id)}>delete</Button>
+        </Item>
       ))}
     </ul>
   );
@@ -21,5 +22,5 @@ RenderContacts.prototype = {
       number: PropTypes.string,
     })
   ),
-  deleteContact: PropTypes.func,
+  onDelete: PropTypes.func,
 };
